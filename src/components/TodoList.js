@@ -1,18 +1,17 @@
-import { Fragment } from "react";
+import axios from "axios";
+import { Fragment, useEffect } from "react";
 
 const TodoList = (props) => {
-    //Below code is not correct. Hence commented
-    // const onDeleteHandler = () => {
-    //     console.log('Delete clicked');
-    //     fetch('https://todo-react-portfolio-default-rtdb.firebaseio.com/TodoLost.json/0', {
-    //         method: 'DELETE'
-    //     });
-    // }
+    const onDeleteHandler = () => {
+        console.log('Delete clicked');
+        axios.delete('https://todo-react-portfolio-default-rtdb.firebaseio.com/TodoLost/id/0')
+            .then(() => console.log('Deleted Successfully'));
+    }
 
     return (
         <Fragment>
             <ul>
-                <li><span><i class="fa fa-trash"></i> </span>{props.todoItem}</li>
+                <li><span><i onClick={onDeleteHandler} class="fa fa-trash"></i> </span>{props.todoItem}</li>
             </ul>
         </Fragment>
     );

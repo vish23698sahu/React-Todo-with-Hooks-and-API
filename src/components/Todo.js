@@ -32,13 +32,14 @@ const Todo = () => {
             setIsLoading(false);
             setHttpError(error.message);
         });
-    }, []);
+    }, [todoList]);
 
     const onAddTodoHandler = (event) => {
         setEnteredTodo(event.target.value);
         if (enteredTodo.trim !== '') {
             setEnteredTodo(event.target.value);
         }
+        settodoList(todoList);
     }
 
     const onkeyPressHandler = async (e) => {
@@ -50,9 +51,9 @@ const Todo = () => {
                     id: Math.random(),
                     todo: enteredTodo
                 })
-            })
+            });
         }
-    }
+    };
 
     const showTodos = todoList.map((list) => {
         return <TodoList todoItem={list.todo} />
@@ -65,9 +66,7 @@ const Todo = () => {
                 <input type="text" value={enteredTodo} placeholder="Add New Todo" onChange={onAddTodoHandler} onKeyPress={(e) => onkeyPressHandler(e)} />
                 {isLoading && <p>Loading your Todos...</p>}
                 {httpError}
-                {console.log('Before')}
                 {showTodos}
-                {console.log('After')}
             </div>
         </Fragment>
     );
